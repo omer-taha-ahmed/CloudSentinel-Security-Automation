@@ -29,7 +29,7 @@ AWS-CloudSentinel/
 ---- 
 ## 🚀 Step-by-Step Implementation Guide
 
-Phase 1: Secure Origin Storage (S3)
+Phase 1: Secure Origin Storage (S3):
 
 1/ Create Bucket: Create a private S3 bucket (e.g., cloudsentinel-storage-01).
 
@@ -38,7 +38,7 @@ Phase 1: Secure Origin Storage (S3)
 3/ Upload Content: Upload the index.html file from the /frontend folder of this repo.
 
 4/ Purpose: This ensures the data is not accessible via the public internet, only through our secure CDN.
-
+_______________________________________________
 
 Phase 2: Secure Global Delivery (CloudFront & OAC)
 1/ Create Distribution: Set the Origin Domain to your S3 bucket.
@@ -50,6 +50,7 @@ Phase 2: Secure Global Delivery (CloudFront & OAC)
 4/ Security Handshake: After the distribution is created, copy the generated S3 Bucket Policy.
 
 5/ Apply Policy: Navigate to your S3 Bucket -> Permissions -> Bucket Policy, and paste it there. This "whitelists" CloudFront to talk to your private S3.
+_________________________________________
 
 Phase 3: Edge Security Shield (AWS WAF)
 1/ Create Web ACL: Navigate to AWS WAF and create a new Web ACL.
@@ -60,6 +61,7 @@ Phase 3: Edge Security Shield (AWS WAF)
 
    * Core Rule Set (CRS): Protects against OWASP Top 10 (SQLi, XSS).
    * Amazon IP Reputation List: Blocks requests from known malicious bots/IPs.
+___________________________________________
 
 Phase 4: Automated Heartbeat (Lambda & SNS)
 1/ Create Alert Topic: Create an SNS Topic (Standard) named Sentinel-Alerts.
